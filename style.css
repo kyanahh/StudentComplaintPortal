@@ -1,0 +1,20 @@
+.bg-gray {
+    background-color: #2c3136;
+}
+
+.h-45 {
+    height: 45px;
+}
+
+.login {
+    background-image: url('images/plmun.jpg'); 
+    background-size: cover;
+}
+
+.text-gray {
+    color: 2c3136;
+}
+
+.btn-greenblue {
+    background-color: #304e53;
+}
