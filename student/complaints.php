@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errorMessage = "Invalid query " . $connection->error;
     } else {
         // Send email using Brevo API
-        $config = Configuration::getDefaultConfiguration()->setApiKey('api-key', 'your-key');
+        $config = Configuration::getDefaultConfiguration()->setApiKey('api-key', '');
 
         $apiInstance = new TransactionalEmailsApi(
             new Client(),

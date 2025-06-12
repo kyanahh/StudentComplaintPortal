@@ -17,22 +17,6 @@ if(isset($_SESSION["logged_in"])){
     $textaccount = "Account";
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $subjects =  ucwords($_POST["subjects"]);
-    $messages = ucfirst(strtolower($_POST["messages"]));
-
-    $insertQuery = "INSERT INTO complaints (userid, subjects, messages) 
-    VALUES ('$user', '$subjects', '$messages')";
-    $result = $connection->query($insertQuery);
-
-    if (!$result) {
-        $errorMessage = "Invalid query " . $connection->error;
-    } else {
-        $subjects = $messagess = "";
-        
-    }
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -75,6 +59,61 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         </div>
     </nav>
+
+    <div class="container d-flex justify-content-center">
+        <div class="card mt-4 col-sm-9 bg-gray text-light p-3">
+            <div class="row d-flex align-items-center">
+                <div class="col-sm-1">
+                    <i class="bi bi-house-door display-4 text-success"></i>
+                </div>
+                <div class="col pt-2">
+                    <h4>Student Complaint Portal</h4>
+                </div>
+                <div class="col d-flex justify-content-end gap-2 mt-3 me-3">
+                    <i class="bi bi-house-door"></i> / <p class="text-success"><?php echo $firstname; ?> </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container mt-5 bg-light rounded p-4 col-sm-6 bg-gray">
+        <h4 class="text-center mb-4">Complaint Status Overview</h4>
+        <canvas id="statusChart" width="400" height="200"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        fetch('complaints_data.php')
+            .then(response => response.json())
+            .then(data => { 
+                const statuses = data.map(row => row.status);
+                const counts = data.map(row => row.count);
+
+                const ctx = document.getElementById('statusChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: statuses,
+                        datasets: [{
+                            label: 'No. of Complaints',
+                            data: counts,
+                            backgroundColor: ['#ffc107', '#0dcaf0', '#198754', '#dc3545'], // Pending, In Progress, Resolved, Unresolved
+                            borderColor: '#343a40',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                precision: 0
+                            }
+                        }
+                    }
+                });
+            });
+    </script>
 
 </body>
 </html>

@@ -43,7 +43,7 @@ try {
     }
 
     // Step 3: Send email via Brevo
-    $config = Configuration::getDefaultConfiguration()->setApiKey('api-key', 'your-key');
+    $config = Configuration::getDefaultConfiguration()->setApiKey('api-key', '');
     $apiInstance = new TransactionalEmailsApi(new Client(), $config);
 
     $emailData = new SendSmtpEmail([
