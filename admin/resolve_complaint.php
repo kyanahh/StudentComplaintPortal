@@ -48,7 +48,7 @@ try {
 
     $emailData = new SendSmtpEmail([
         'subject' => 'Your Complaint Has Been Resolved',
-        'sender' => ['name' => 'MTMB', 'email' => 'kianna.businessemail@gmail.com'],
+        'sender' => ['name' => 'PLMun Student Complaint Portal', 'email' => 'kianna.businessemail@gmail.com'],
         'to' => [['email' => $email, 'name' => $name]],
         'htmlContent' => "<p>Dear $name,</p><p>Your complaint has been resolved. <br><strong>Remarks:</strong><br>$remarks</p><p>Thank you.</p>"
     ]);
